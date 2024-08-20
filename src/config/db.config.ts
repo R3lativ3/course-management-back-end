@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 import Course from "../models/course.model";
 import Professor from "../models/professor.model";
 import CourseProfessor from "../models/course_professor.model";
@@ -6,12 +7,14 @@ import Student from "../models/student.model";
 import CourseStatus from "../models/course_status.model";
 import CourseEnrollment from "../models/course_enrollment.model";
 
+dotenv.config();
+
 const sequelize = new Sequelize(
-  "bckkrpfallvmg57mgkcl",
-  "us1xk7qrrqeptl3g",
-  "ihsBxqoR9wgCX3LPzBdn",
+  process.env.DB_NAME as string,
+  process.env.DB_USER as string,
+  process.env.DB_PASSWORD as string,
   {
-    host: "bckkrpfallvmg57mgkcl-mysql.services.clever-cloud.com",
+    host: process.env.DB_HOST as string,
     dialect: "mysql",
     logging: false,
   }
