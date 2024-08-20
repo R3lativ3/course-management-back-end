@@ -9,12 +9,13 @@ interface CourseAttributes {
   price?: number;
   capacity?: number;
   credits?: number;
+  deleted: boolean;
 }
 
 interface CourseCreationAttributes
   extends Optional<
     CourseAttributes,
-    "id" | "description" | "price" | "capacity" | "credits"
+    "id" | "description" | "price" | "capacity" | "credits" | "deleted"
   > {}
 
 class Course
@@ -27,6 +28,7 @@ class Course
   public price?: number;
   public capacity?: number;
   public credits?: number;
+  public deleted!: boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -54,6 +56,10 @@ Course.init(
     },
     credits: {
       type: DataTypes.INTEGER,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

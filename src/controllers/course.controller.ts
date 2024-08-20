@@ -8,7 +8,7 @@ export const createCourse = async (
   try {
     console.log(req.body);
     if (!req.body.name) {
-      res.status(400).json({ error: 'El campo "name" es obligatorio' });
+      res.status(400).json({ error: 'The "name" field is required' });
       return;
     }
     const course = await courseService.createCourse(req.body);
@@ -37,7 +37,7 @@ export const getCourseById = async (
   try {
     const course = await courseService.getCourseById(req.params.id);
     if (!course) {
-      res.status(404).json({ message: "Curso no encontrado" });
+      res.status(404).json({ message: "Course not found" });
       return;
     }
     res.status(200).json(course);

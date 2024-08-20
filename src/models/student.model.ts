@@ -7,6 +7,7 @@ interface StudentAttributes {
   last_name: string;
   registration_number: string;
   email: string;
+  deleted: boolean;
 }
 
 interface StudentCreationAttributes extends Optional<StudentAttributes, "id"> {}
@@ -20,6 +21,7 @@ class Student
   public last_name!: string;
   public registration_number!: string;
   public email!: string;
+  public deleted!: boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -49,6 +51,11 @@ Student.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

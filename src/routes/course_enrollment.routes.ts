@@ -11,14 +11,14 @@ const router = Router();
  * @swagger
  * tags: 
  *   name: CourseEnrollment
- *   description: API para la gestión de inscripciones de cursos
+ *   description: API for course registration managements
  */
 
 /**
  * @swagger
  * /course_enrollment:
  *   post:
- *     summary: Inscribir un estudiante en un curso
+ *     summary: Enroll a student in a course
  *     tags: [CourseEnrollment]
  *     requestBody:
  *       required: true
@@ -29,16 +29,16 @@ const router = Router();
  *             properties:
  *               course_professor_id:
  *                 type: integer
- *                 description: ID del curso y profesor relacionado
+ *                 description: Course ID and related teacher
  *               student_id:
  *                 type: integer
- *                 description: ID del estudiante
+ *                 description: Student ID
  *               course_status_id:
  *                 type: integer
- *                 description: Estado del curso (opcional)
+ *                 description: Course status (optional)
  *     responses:
  *       200:
- *         description: Estudiante inscrito exitosamente
+ *         description: Student successfully enrolled
  *         content:
  *           application/json:
  *             schema:
@@ -46,7 +46,7 @@ const router = Router();
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Inscripción exitosa"
+ *                   example: "Registration successful"
  */
 router.post("/", enrollStudent);
 
@@ -54,11 +54,11 @@ router.post("/", enrollStudent);
  * @swagger
  * /course_enrollment:
  *   get:
- *     summary: Obtener todas las inscripciones
+ *     summary: Get all registrations
  *     tags: [CourseEnrollment]
  *     responses:
  *       200:
- *         description: Lista de todas las inscripciones
+ *         description: List of all registrations
  *         content:
  *           application/json:
  *             schema:
@@ -84,7 +84,7 @@ router.get("/", getEnrollments);
  * @swagger
  * /course_enrollment/{id}:
  *   delete:
- *     summary: Eliminar una inscripción por ID
+ *     summary: Delete a registration by ID
  *     tags: [CourseEnrollment]
  *     parameters:
  *       - in: path
@@ -92,10 +92,10 @@ router.get("/", getEnrollments);
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID de la inscripción
+ *         description: Registration ID
  *     responses:
  *       200:
- *         description: Inscripción eliminada exitosamente
+ *         description: Registration deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -103,7 +103,7 @@ router.get("/", getEnrollments);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Inscripción eliminada"
+ *                   example: "Registration removed"
  */
 router.delete("/:id", deleteEnrollment);
 

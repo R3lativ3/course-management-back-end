@@ -2,6 +2,9 @@ import express from "express";
 import courseRoutes from "./routes/course.routes";
 import studentRoutes from "./routes/student.routes";
 import courseEnrollmentRoutes from "./routes/course_enrollment.routes";
+import professorRoutes from "./routes/professor.routes";
+import courseStatusRoutes from "./routes/course_status.routes";
+import courseProfessorRoutes from "./routes/course_professor.routes";
 import { connectDB, syncModels } from "./config/db.config";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
@@ -16,7 +19,7 @@ const swaggerOptions = {
     info: {
       title: "Course-Student Assignment API",
       version: "1.0.0",
-      description: "API para gestionar cursos, estudiantes y matriculaciones",
+      description: "API to manage courses, students and enrollments",
     },
     servers: [
       {
@@ -33,21 +36,24 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/course", courseRoutes);
 app.use("/student", studentRoutes);
 app.use("/course_enrollment", courseEnrollmentRoutes);
+app.use("/professor", professorRoutes);
+app.use("/course-status", courseStatusRoutes);
+app.use("/course_professor", courseProfessorRoutes);
 
 const startServer = async () => {
   try {
     await connectDB();
-    console.log("Conexión a la base de datos establecida correctamente.");
+    console.log("Database connection established successfully.");
 
     await syncModels();
-    console.log("Modelos sincronizados con la base de datos.");
+    console.log("Models synchronized with the database.");
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
-      console.log(`Servidor ejecutándose en el puerto ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Error al iniciar el servidor:", error);
+    console.error("Error starting server:", error);
   }
 };
 

@@ -6,6 +6,7 @@ interface ProfessorAttributes {
   name: string;
   last_name: string;
   email: string;
+  deleted: boolean;
 }
 
 interface ProfessorCreationAttributes
@@ -19,6 +20,7 @@ class Professor
   public name!: string;
   public last_name!: string;
   public email!: string;
+  public deleted!: boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -43,6 +45,10 @@ Professor.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

@@ -20,9 +20,8 @@ const sequelize = new Sequelize(
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Conexión a la base de datos exitosa");
   } catch (error) {
-    console.error("Error al conectar a la base de datos:", error);
+    console.error("Error connecting to database:", error);
     throw error;
   }
 };
@@ -30,9 +29,9 @@ const connectDB = async () => {
 const syncModels = async () => {
   try {
     await sequelize.sync({ alter: true });
-    console.log("Modelos sincronizados con la base de datos");
+    console.log("Models synchronized with the database");
   } catch (error) {
-    console.error("Error al sincronizar los modelos:", error);
+    console.error("Error synchronizing models:", error);
     throw error;
   }
 };

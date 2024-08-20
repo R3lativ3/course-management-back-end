@@ -1,29 +1,29 @@
 import { Router } from "express";
 import {
-  createCourse,
-  getCourses,
-  updateCourse,
-  deleteCourse,
-} from "../controllers/course.controller";
+  createProfessor,
+  getProfessors,
+  updateProfessor,
+  deleteProfessor,
+} from "../controllers/professor.controller";
 
 const router = Router();
 
 /**
  * @swagger
  * tags:
- *   name: Course
- *   description: API for course management
+ *   name: Professor
+ *   description: API for teacher management
  */
 
 /**
  * @swagger
- * /course:
+ * /professor:
  *   get:
- *     summary: Get the list of all courses
- *     tags: [Course]
+ *     summary: Get the list of all teachers
+ *     tags: [Professor]
  *     responses:
  *       200:
- *         description: List of courses
+ *         description: List of teachers
  *         content:
  *           application/json:
  *             schema:
@@ -35,23 +35,19 @@ const router = Router();
  *                     type: integer
  *                   name:
  *                     type: string
- *                   description:
+ *                   last_name:
  *                     type: string
- *                   price:
- *                     type: number
- *                   capacity:
- *                     type: integer
- *                   credits:
- *                     type: integer
+ *                   email:
+ *                     type: string
  */
-router.get("/", getCourses);
+router.get("/", getProfessors);
 
 /**
  * @swagger
- * /course:
+ * /professor:
  *   post:
- *     summary: Create a new course
- *     tags: [Course]
+ *     summary: Create a new teacher
+ *     tags: [Professor]
  *     requestBody:
  *       required: true
  *       content:
@@ -61,17 +57,13 @@ router.get("/", getCourses);
  *             properties:
  *               name:
  *                 type: string
- *               description:
+ *               last_name:
  *                 type: string
- *               price:
- *                 type: number
- *               capacity:
- *                 type: integer
- *               credits:
- *                 type: integer
+ *               email:
+ *                 type: string
  *     responses:
  *       201:
- *         description: Course created successfully
+ *         description: Professor created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -81,30 +73,26 @@ router.get("/", getCourses);
  *                   type: integer
  *                 name:
  *                   type: string
- *                 description:
+ *                 last_name:
  *                   type: string
- *                 price:
- *                   type: number
- *                 capacity:
- *                   type: integer
- *                 credits:
- *                   type: integer
+ *                 email:
+ *                   type: string
  */
-router.post("/", createCourse);
+router.post("/", createProfessor);
 
 /**
  * @swagger
- * /course/{id}:
+ * /professor/{id}:
  *   put:
- *     summary: Update an existing course
- *     tags: [Course]
+ *     summary: Update an existing teacher
+ *     tags: [Professor]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
- *         description: Course ID
+ *         description: Teacher ID
  *     requestBody:
  *       required: true
  *       content:
@@ -114,37 +102,33 @@ router.post("/", createCourse);
  *             properties:
  *               name:
  *                 type: string
- *               description:
+ *               last_name:
  *                 type: string
- *               price:
- *                 type: number
- *               capacity:
- *                 type: integer
- *               credits:
- *                 type: integer
+ *               email:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Course successfully updated
+ *         description: Teacher successfully updated
  */
-router.put("/:id", updateCourse);
+router.put("/:id", updateProfessor);
 
 /**
  * @swagger
- * /course/{id}:
+ * /professor/{id}:
  *   delete:
- *     summary: Delete a course
- *     tags: [Course]
+ *     summary: Delete a teacher
+ *     tags: [Professor]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
- *         description: Course ID
+ *         description: Teacher ID
  *     responses:
  *       204:
- *         description: Course successfully deleted
+ *         description: Professor successfully removed
  */
-router.delete("/:id", deleteCourse);
+router.delete("/:id", deleteProfessor);
 
 export default router;

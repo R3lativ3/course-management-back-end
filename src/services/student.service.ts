@@ -6,6 +6,8 @@ interface StudentCreationAttributes {
   last_name: string;
   registration_number: string;
   email: string;
+  phone_number?: string;
+  deleted: boolean;
 }
 
 export const createStudent = async (
@@ -14,19 +16,17 @@ export const createStudent = async (
   try {
     return await Student.create(studentData);
   } catch (error) {
-    throw new Error(
-      "Error al crear el estudiante: " + (error as Error).message
-    );
+    throw new Error("Error creating student: " + (error as Error).message);
   }
 };
 
 export const getStudents = async (): Promise<Student[]> => {
   try {
-    return await Student.findAll();
+    return await Student.findAll({
+      where: { deleted: false },
+    });
   } catch (error) {
-    throw new Error(
-      "Error al obtener los estudiantes: " + (error as Error).message
-    );
+    throw new Error("Error getting students: " + (error as Error).message);
   }
 };
 
@@ -34,26 +34,32 @@ export const updateStudent = async (
   studentId: string,
   studentData: StudentCreationAttributes
 ): Promise<Student | null> => {
-  const student = await Student.findByPk(studentId);
-  if (!student) throw new Error("Estudiante no encontrado");
+  const student = await Student.findOne({
+    where: {
+      id: studentId,
+      deleted: false,
+    },
+  });
+  if (!student) throw new Error("Student not found");
   try {
     await student.update(studentData);
     return student;
   } catch (error) {
-    throw new Error(
-      "Error al actualizar el estudiante: " + (error as Error).message
-    );
+    throw new Error("Error updating student: " + (error as Error).message);
   }
 };
 
 export const deleteStudent = async (studentId: string): Promise<void> => {
-  const student = await Student.findByPk(studentId);
-  if (!student) throw new Error("Estudiante no encontrado");
+  const student = await Student.findOne({
+    where: {
+      id: studentId,
+      deleted: false,
+    },
+  });
+  if (!student) throw new Error("Student not found");
   try {
-    await student.destroy();
+    await student.update({ deleted: true });
   } catch (error) {
-    throw new Error(
-      "Error al eliminar el estudiante: " + (error as Error).message
-    );
+    throw new Error("Error deleting student: " + (error as Error).message);
   }
 };

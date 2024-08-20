@@ -12,18 +12,18 @@ const router = Router();
  * @swagger
  * tags:
  *   name: Student
- *   description: API para la gestión de estudiante
+ *   description: API for student management
  */
 
 /**
  * @swagger
  * /student:
  *   get:
- *     summary: Obtiene la lista de todos los estudiantes
+ *     summary: Get the list of all students
  *     tags: [Student]
  *     responses:
  *       200:
- *         description: Lista de estudiantes
+ *         description: List of students
  *         content:
  *           application/json:
  *             schema:
@@ -48,7 +48,7 @@ router.get("/", getStudents);
  * @swagger
  * /student:
  *   post:
- *     summary: Crea un nuevo estudiante
+ *     summary: Create a new student
  *     tags: [Student]
  *     requestBody:
  *       required: true
@@ -63,11 +63,13 @@ router.get("/", getStudents);
  *                 type: string
  *               email:
  *                 type: string
+ *               registration_number:
+ *                 type: string
  *               phone_number:
  *                 type: string
  *     responses:
  *       201:
- *         description: Estudiante creado exitosamente
+ *         description: Student created successfully
  */
 router.post("/", createStudent);
 
@@ -75,7 +77,7 @@ router.post("/", createStudent);
  * @swagger
  * /student/{id}:
  *   put:
- *     summary: Actualiza un estudiante existente
+ *     summary: Update an existing student
  *     tags: [Student]
  *     parameters:
  *       - in: path
@@ -83,7 +85,7 @@ router.post("/", createStudent);
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID del estudiante
+ *         description: Student ID
  *     requestBody:
  *       required: true
  *       content:
@@ -101,7 +103,7 @@ router.post("/", createStudent);
  *                 type: string
  *     responses:
  *       200:
- *         description: Estudiante actualizado exitosamente
+ *         description: Student successfully updated
  */
 router.put("/:id", updateStudent);
 
@@ -109,7 +111,7 @@ router.put("/:id", updateStudent);
  * @swagger
  * /student/{id}:
  *   delete:
- *     summary: Elimina un estudiante
+ *     summary: Delete a student
  *     tags: [Student]
  *     parameters:
  *       - in: path
@@ -117,10 +119,10 @@ router.put("/:id", updateStudent);
  *         schema:
  *           type: integer
  *         required: true
- *         description: ID del estudiante
+ *         description: Student ID
  *     responses:
  *       204:
- *         description: Estudiante eliminado exitosamente
+ *         description: Student successfully deleted
  */
 router.delete("/:id", deleteStudent);
 
