@@ -6,7 +6,7 @@ import Student from "../models/student.model";
 import CourseStatus from "../models/course_status.model";
 import CourseEnrollment from "../models/course_enrollment.model";
 
-export const sequelize = new Sequelize(
+const sequelize = new Sequelize(
   "bckkrpfallvmg57mgkcl",
   "us1xk7qrrqeptl3g",
   "ihsBxqoR9wgCX3LPzBdn",
@@ -17,12 +17,13 @@ export const sequelize = new Sequelize(
   }
 );
 
-export const connectDB = async () => {
+const connectDB = async () => {
   try {
     await sequelize.authenticate();
     console.log("Conexión a la base de datos exitosa");
   } catch (error) {
     console.error("Error al conectar a la base de datos:", error);
+    throw error;
   }
 };
 
@@ -32,7 +33,8 @@ const syncModels = async () => {
     console.log("Modelos sincronizados con la base de datos");
   } catch (error) {
     console.error("Error al sincronizar los modelos:", error);
+    throw error;
   }
 };
 
-export { syncModels };
+export { sequelize, connectDB, syncModels };

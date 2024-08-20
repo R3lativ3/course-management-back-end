@@ -1,49 +1,60 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/db.config";
 
-const Professor = sequelize.define("Professor", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+// Define los atributos del modelo `Professor`
+interface ProfessorAttributes {
+  id: number;
+  name: string;
+  last_name: string;
+  email: string;
+}
+
+// Define los atributos opcionales al crear un profesor
+interface ProfessorCreationAttributes
+  extends Optional<ProfessorAttributes, "id"> {}
+
+// Extiende el modelo de Sequelize
+class Professor
+  extends Model<ProfessorAttributes, ProfessorCreationAttributes>
+  implements ProfessorAttributes
+{
+  public id!: number;
+  public name!: string;
+  public last_name!: string;
+  public email!: string;
+
+  // Timestamps
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+// Inicializa el modelo `Professor`
+Professor.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  last_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  deleted: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  deleted_at: {
-    type: DataTypes.DATE,
-  },
-  deleted_by: {
-    type: DataTypes.INTEGER,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  created_by: {
-    type: DataTypes.INTEGER,
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updated_by: {
-    type: DataTypes.INTEGER,
-  },
-});
+  {
+    sequelize,
+    tableName: "professor",
+    timestamps: true,
+  }
+);
 
 export default Professor;

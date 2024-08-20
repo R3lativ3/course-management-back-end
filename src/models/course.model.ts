@@ -1,56 +1,66 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/db.config";
+import Professor from "./professor.model";
 
-const Course = sequelize.define("Course", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-  },
-  price: {
-    type: DataTypes.DECIMAL(7, 2),
-  },
-  capacity: {
-    type: DataTypes.TINYINT,
-  },
-  credits: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 1,
+interface CourseAttributes {
+  id: number;
+  name: string;
+  description?: string;
+  price?: number;
+  capacity?: number;
+  credits?: number;
+}
+
+interface CourseCreationAttributes
+  extends Optional<
+    CourseAttributes,
+    "id" | "description" | "price" | "capacity" | "credits"
+  > {}
+
+class Course
+  extends Model<CourseAttributes, CourseCreationAttributes>
+  implements CourseAttributes
+{
+  public id!: number;
+  public name!: string;
+  public description?: string;
+  public price?: number;
+  public capacity?: number;
+  public credits?: number;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+Course.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+    },
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    capacity: {
+      type: DataTypes.INTEGER,
+    },
+    credits: {
+      type: DataTypes.INTEGER,
     },
   },
-  deleted: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  deleted_at: {
-    type: DataTypes.DATE,
-  },
-  deleted_by: {
-    type: DataTypes.INTEGER,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  created_by: {
-    type: DataTypes.INTEGER,
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updated_by: {
-    type: DataTypes.INTEGER,
-  },
-});
+  {
+    sequelize,
+    tableName: "course",
+    timestamps: true,
+  }
+);
 
 export default Course;
