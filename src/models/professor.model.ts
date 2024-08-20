@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/db.config";
 
-// Define los atributos del modelo `Professor`
 interface ProfessorAttributes {
   id: number;
   name: string;
@@ -9,11 +8,9 @@ interface ProfessorAttributes {
   email: string;
 }
 
-// Define los atributos opcionales al crear un profesor
 interface ProfessorCreationAttributes
   extends Optional<ProfessorAttributes, "id"> {}
 
-// Extiende el modelo de Sequelize
 class Professor
   extends Model<ProfessorAttributes, ProfessorCreationAttributes>
   implements ProfessorAttributes
@@ -23,12 +20,10 @@ class Professor
   public last_name!: string;
   public email!: string;
 
-  // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-// Inicializa el modelo `Professor`
 Professor.init(
   {
     id: {

@@ -21,7 +21,7 @@ class CourseEnrollment
   public course_professor_id!: number;
   public student_id!: number;
   public course_status_id?: number;
-  public enrollment_date!: Date; // Asegúrate de que la propiedad exista en la clase
+  public enrollment_date!: Date;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

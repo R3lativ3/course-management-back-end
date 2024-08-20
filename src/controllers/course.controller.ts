@@ -46,7 +46,6 @@ export const getCourseById = async (
   }
 };
 
-// Actualizar un curso
 export const updateCourse = async (
   req: Request,
   res: Response
