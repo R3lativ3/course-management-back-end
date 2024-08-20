@@ -1,13 +1,13 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.config";
 
-const Student = sequelize.define("Student", {
+const Professor = sequelize.define("Professor", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  first_name: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -15,22 +15,10 @@ const Student = sequelize.define("Student", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  registration_number: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-  },
-  phone_number: {
-    type: DataTypes.STRING,
-  },
-  enrollment_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
   },
   deleted: {
     type: DataTypes.BOOLEAN,
@@ -58,4 +46,4 @@ const Student = sequelize.define("Student", {
   },
 });
 
-export default Student;
+export default Professor;

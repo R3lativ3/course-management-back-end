@@ -1,31 +1,16 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.config";
 
-const Course = sequelize.define("Course", {
+const CourseStatus = sequelize.define("CourseStatus", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.TINYINT,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
+  status: {
+    type: DataTypes.STRING(80),
     allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-  },
-  price: {
-    type: DataTypes.DECIMAL(7, 2),
-  },
-  capacity: {
-    type: DataTypes.TINYINT,
-  },
-  credits: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 1,
-    },
+    unique: true,
   },
   deleted: {
     type: DataTypes.BOOLEAN,
@@ -34,23 +19,23 @@ const Course = sequelize.define("Course", {
   deleted_at: {
     type: DataTypes.DATE,
   },
-  deleted_by: {
-    type: DataTypes.INTEGER,
-  },
   created_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
-  created_by: {
-    type: DataTypes.INTEGER,
-  },
   updated_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
+  },
+  deleted_by: {
+    type: DataTypes.INTEGER,
+  },
+  created_by: {
+    type: DataTypes.INTEGER,
   },
   updated_by: {
     type: DataTypes.INTEGER,
   },
 });
 
-export default Course;
+export default CourseStatus;

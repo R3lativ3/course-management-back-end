@@ -1,14 +1,14 @@
-import express, { Application, Request, Response } from 'express';
+import express from "express";
+import { connectDB, syncModels } from "./config/db.config";
 
-const app: Application = express();
+const app = express();
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('¡Hola, mundo desde TypeScript y Express!');
-});
+connectDB();
+syncModels();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
