@@ -8,6 +8,13 @@ interface CourseEnrollmentAttributes {
   student_id: number;
   course_status_id?: number;
   enrollment_date?: Date;
+  deleted: boolean;
+  deleted_at?: Date;
+  deleted_by?: number;
+  created_by?: number;
+  created_at?: Date;
+  updated_at?: Date;
+  updated_by?: number;
 }
 
 interface CourseEnrollmentCreationAttributes
@@ -22,9 +29,14 @@ class CourseEnrollment
   public student_id!: number;
   public course_status_id?: number;
   public enrollment_date!: Date;
+  public deleted!: boolean;
+  public deleted_at?: Date;
+  public deleted_by?: number;
+  public created_by?: number;
+  public updated_by?: number;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
 }
 
 CourseEnrollment.init(
@@ -53,11 +65,42 @@ CourseEnrollment.init(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    deleted_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    created_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     sequelize,
     tableName: "course_enrollment",
     timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 

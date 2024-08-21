@@ -10,6 +10,10 @@ interface CourseAttributes {
   capacity?: number;
   credits?: number;
   deleted: boolean;
+  deleted_at?: Date;
+  deleted_by?: number;
+  created_by?: number;
+  updated_by?: number;
 }
 
 interface CourseCreationAttributes
@@ -29,6 +33,10 @@ class Course
   public capacity?: number;
   public credits?: number;
   public deleted!: boolean;
+  public deleted_at?: Date;
+  public deleted_by?: number;
+  public created_by?: number;
+  public updated_by?: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -49,10 +57,10 @@ Course.init(
       type: DataTypes.TEXT,
     },
     price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(7, 2),
     },
     capacity: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.TINYINT,
     },
     credits: {
       type: DataTypes.INTEGER,
@@ -61,11 +69,29 @@ Course.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    deleted_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    created_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    updated_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     sequelize,
     tableName: "course",
     timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 

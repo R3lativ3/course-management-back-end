@@ -13,6 +13,7 @@ interface CourseProfessorAttributes {
   deleted_at?: Date;
   deleted_by?: number;
   created_by: number;
+  created_at?: Date;
   updated_at?: Date;
   updated_by?: number;
 }
@@ -36,6 +37,7 @@ class CourseProfessor
   public deleted_at?: Date;
   public deleted_by?: number;
   public created_by!: number;
+  public created_at?: Date;
   public updated_at?: Date;
   public updated_by?: number;
 }
@@ -84,6 +86,10 @@ CourseProfessor.init(
     created_by: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updated_at: {
       type: DataTypes.DATE,

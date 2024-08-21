@@ -7,6 +7,10 @@ interface ProfessorAttributes {
   last_name: string;
   email: string;
   deleted: boolean;
+  deleted_at?: Date;
+  deleted_by?: number;
+  created_by?: number;
+  updated_by?: number;
 }
 
 interface ProfessorCreationAttributes
@@ -21,6 +25,10 @@ class Professor
   public last_name!: string;
   public email!: string;
   public deleted!: boolean;
+  public deleted_at?: Date;
+  public deleted_by?: number;
+  public created_by?: number;
+  public updated_by?: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -50,11 +58,29 @@ Professor.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    deleted_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    created_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    updated_by: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     sequelize,
     tableName: "professor",
     timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 
