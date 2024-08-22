@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createStudent,
   getStudents,
+  getStudentById,
   updateStudent,
   deleteStudent,
 } from "../controllers/student.controller";
@@ -39,10 +40,50 @@ const router = Router();
  *                     type: string
  *                   email:
  *                     type: string
+ *                   registration_number:
+ *                     type: string
  *                   phone_number:
  *                     type: string
  */
 router.get("/", getStudents);
+
+/**
+ * @swagger
+ * /student/{id}:
+ *   get:
+ *     summary: Get a student by ID
+ *     tags: [Student]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Student ID
+ *     responses:
+ *       200:
+ *         description: The requested student
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 first_name:
+ *                   type: string
+ *                 last_name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 registration_number:
+ *                   type: string
+ *                 phone_number:
+ *                   type: string
+ *       404:
+ *         description: Student not found
+ */
+router.get("/:id", getStudentById);
 
 /**
  * @swagger

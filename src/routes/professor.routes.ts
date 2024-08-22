@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createProfessor,
   getProfessors,
+  getProfessorById,
   updateProfessor,
   deleteProfessor,
 } from "../controllers/professor.controller";
@@ -41,6 +42,40 @@ const router = Router();
  *                     type: string
  */
 router.get("/", getProfessors);
+
+/**
+ * @swagger
+ * /professor/{id}:
+ *   get:
+ *     summary: Get a professor by ID
+ *     tags: [Professor]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Professor ID
+ *     responses:
+ *       200:
+ *         description: A professor object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 name:
+ *                   type: string
+ *                 last_name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *       404:
+ *         description: Professor not found
+ */
+router.get("/:id", getProfessorById);
 
 /**
  * @swagger
@@ -116,7 +151,7 @@ router.put("/:id", updateProfessor);
  * @swagger
  * /professor/{id}:
  *   delete:
- *     summary: Delete a teacher
+ *     summary: Soft delete a teacher by ID
  *     tags: [Professor]
  *     parameters:
  *       - in: path

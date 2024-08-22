@@ -30,6 +30,23 @@ export const getStudents = async (): Promise<Student[]> => {
   }
 };
 
+export const getStudentById = async (
+  studentId: string
+): Promise<Student | null> => {
+  try {
+    const student = await Student.findOne({
+      where: {
+        id: studentId,
+        deleted: false,
+      },
+    });
+    if (!student) throw new Error("Student not found");
+    return student;
+  } catch (error) {
+    throw new Error("Error getting student: " + (error as Error).message);
+  }
+};
+
 export const updateStudent = async (
   studentId: string,
   studentData: StudentCreationAttributes

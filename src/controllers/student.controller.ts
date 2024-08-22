@@ -25,6 +25,22 @@ export const getStudents = async (
   }
 };
 
+export const getStudentById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const student = await studentService.getStudentById(req.params.id);
+    if (!student) {
+      res.status(404).json({ error: "Student not found" });
+      return;
+    }
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+};
+
 export const updateStudent = async (
   req: Request,
   res: Response

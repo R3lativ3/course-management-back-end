@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createCourse,
   getCourses,
+  getCourseById,
   updateCourse,
   deleteCourse,
 } from "../controllers/course.controller";
@@ -45,6 +46,44 @@ const router = Router();
  *                     type: integer
  */
 router.get("/", getCourses);
+
+/**
+ * @swagger
+ * /course/{id}:
+ *   get:
+ *     summary: Get a course by ID
+ *     tags: [Course]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Course ID
+ *     responses:
+ *       200:
+ *         description: The requested course
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 name:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 price:
+ *                   type: number
+ *                 capacity:
+ *                   type: integer
+ *                 credits:
+ *                   type: integer
+ *       404:
+ *         description: Course not found
+ */
+router.get("/:id", getCourseById);
 
 /**
  * @swagger
