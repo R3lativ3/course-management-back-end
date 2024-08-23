@@ -43,7 +43,7 @@ cd course-student-assignment
 npm install
 ```
 
-4. Create a `.env` file in the root directory and add your database configuration:
+4. Create a `.env` file in the root directory and add your database configuration (please request me the access):
 
 ```
 DB_NAME=your_database_name
