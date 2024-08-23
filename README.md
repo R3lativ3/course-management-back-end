@@ -74,8 +74,9 @@ npm start
 The API documentation is available through Swagger UI. After starting the server, you can access it at:
 
 ```
-http://localhost:[YOUR_PORT]/api-docs
+http://localhost:3000/api-docs
 ```
+Or the port that you have set in the .env file
 
 ## Scripts
 
