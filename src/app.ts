@@ -8,10 +8,25 @@ import courseProfessorRoutes from "./routes/course_professor.routes";
 import { connectDB, syncModels } from "./config/db.config";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+
+// TODO: add site for frontend when deployed
+const whitelist = ["http://localhost:4100", "http://localhost:4200"];
+const corsOptions = {
+  origin: function (origin: any, callback: any) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 const swaggerOptions = {
   swaggerDefinition: {
