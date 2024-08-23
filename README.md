@@ -1,5 +1,7 @@
 # course-management-back-end
 
+![Untitled Diagram drawio (7)](https://github.com/user-attachments/assets/75e2db03-ac35-4339-bdf7-f40a4ced218c)
+
 ## Description
 
 This project is a backend application for managing course student assignments. It provides a RESTful API built with Express.js and uses Sequelize as an ORM to interact with a MySQL database, used for code interview
@@ -101,19 +103,6 @@ http://localhost:[YOUR_PORT]/api-docs
 - ts-node: TypeScript execution environment for Node.js
 - typescript: TypeScript language
 
-## License
-
-This project is licensed under the ISC License.
-
-## Contributing
-
-Contributions to this project are welcome. Please ensure to update tests as appropriate.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a pull request
 
 ## Contact
 
